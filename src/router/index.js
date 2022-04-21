@@ -15,6 +15,11 @@ import Optional from "@/views/Lab/Optional";
 import ChooseStock from "@/views/Lab/ChooseStock";
 import Setting from "@/views/User/setting";
 import UserDetail from "@/views/User/UserDetail";
+import Hs300 from "@/components/Trade/StockPool/Hs300";
+import MySelect from "@/components/Trade/StockPool/MySelect";
+import Plate from "@/components/Trade/StockPool/Plate";
+import SmallMoney from "@/components/Trade/StockPool/SmallMoney";
+import All from "@/components/Trade/StockPool/All";
 
 const routes = [
     {
@@ -108,7 +113,35 @@ const routes = [
             {
                 path: 'trading',
                 name: 'LabTrading',
-                component: Trading
+                component: Trading,
+                children:[
+                    {
+                        path: 'hs300',
+                        name: 'Hs300',
+                        component: Hs300
+                    },
+                    {
+                        path: 'mySelect',
+                        name: 'MySelect',
+                        component:MySelect
+                    },
+                    {
+                        path: 'plate',
+                        name: 'Plate',
+                        component:Plate
+                    },
+                    {
+                        path: 'smallMoney',
+                        name: 'SmallMoney',
+                        component:SmallMoney
+                    },
+                    {
+                        path: 'all',
+                        name: 'All',
+                        component:All
+                    },
+
+                ]
             },
             {
                 path: 'result',

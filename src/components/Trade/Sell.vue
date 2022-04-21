@@ -1,5 +1,7 @@
 <template>
-<h1>Sell</h1>
+<h4>卖点</h4>
+  卖点：
+  死叉
 </template>
 
 <script>

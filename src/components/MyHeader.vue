@@ -1,6 +1,6 @@
 <template>
   <header
-      class="container d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+      class="container d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3  border-bottom">
     <router-link to="/home" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
       <svg t="1648133096034" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
            p-id="4606" width="40" height="40">
@@ -23,10 +23,13 @@
         <router-link to="/home" class="nav-link px-2 link-secondary me-2">主页</router-link>
       </li>
       <li>
-        <router-link to="/lab/market" class="nav-link px-2 link-dark me-2">实验室</router-link>
+        <router-link to="/lab/oneStock" class="nav-link px-2 link-dark me-2">行情观察</router-link>
       </li>
       <li>
-        <router-link to="/trade" class="nav-link px-2 link-dark me-2">交易</router-link>
+        <router-link to="/trade" class="nav-link px-2 link-dark me-2">代码交易</router-link>
+      </li>
+      <li>
+        <router-link to="/ailab" class="nav-link px-2 link-dark me-2">ai分析</router-link>
       </li>
       <li>
         <router-link to="/help" class="nav-link px-2 link-dark me-2">帮助</router-link>
