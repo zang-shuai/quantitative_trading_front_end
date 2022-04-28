@@ -34,13 +34,20 @@ export default {
     let stock_basic = $store.state.stock.stock_basic
     let stocks = ref({})
     for (let i = 0; i < stock_basic.length; i++) {
-      stocks.value[stock_basic[i][0] + '  ' + stock_basic[i][2]] = false
+      stocks.value[stock_basic[i][0] + '  ' + stock_basic[i][2]] = i === 0;
     }
 
+    draw_picture('000001.SZ')
+
+    let count =0
     function draw_picture(ts_codex) {
       let ts_code = ts_codex.slice(0, 10)
       stocks.value[ts_codex] = true
       stocks.value[pre.value] = false
+      if(count===0){
+        stocks.value['000001.SZ  平安银行'] = false
+        count++
+      }
       pre.value = ts_codex
       get_daily('get_daily', ts_code).then(
           daily => {

@@ -69,11 +69,11 @@ export default {
     },
     //图片上传成功后
     handleUploadSuccess (data){
-      console.log(data)
+      // console.log(data)
       switch(data.name){
         case 'flagImg':
           this.formValidate.mainImage = 'http://ydfblog.cn/dfs/'+data.url;
-          console.log('最终输出'+data.name)
+          // console.log('最终输出'+data.name)
           break;
       }
       this.cropperModel = false;

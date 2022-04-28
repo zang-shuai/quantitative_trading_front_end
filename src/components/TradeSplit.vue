@@ -11,12 +11,12 @@
     <pane>
       <splitpanes horizontal>
         <pane>
-          <span id="k_picture" style="width: 1000px;height: 100%"></span>
+<!--          <span id="k_picture" style="width: 1000px;height: 100%"></span>-->
+          <result/>
         </pane>
         <pane>
-          <span>
-            <button @click="drawImg">绘图</button>
-          </span>
+<!--          <span></span>-->
+          <log/>
         </pane>
       </splitpanes>
     </pane>
@@ -30,11 +30,13 @@ import * as echarts from 'echarts';
 import 'splitpanes/dist/splitpanes.css'
 import CodeEditor from "@/components/CodeEditor";
 import axios from "axios";
+import Result from "@/views/Lab/Result";
+import Log from "@/components/Trade/Log";
 
 export default {
   name: "TradeSplit",
 
-  components: {CodeEditor, Splitpanes, Pane},
+  components: {Log, Result, CodeEditor, Splitpanes, Pane},
   setup() {
     function drawImg2() {
       let chartDom = document.getElementById('k_picture');

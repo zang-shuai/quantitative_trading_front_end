@@ -1,9 +1,9 @@
 <template>
   <div>
-    <button @click="selectAll()" style="float: left">{{ selectall }}</button>
+<!--    <button @click="selectAll()" style="float: left">{{ selectall }}</button>-->
     <div style="height:120px;overflow-y:auto;">
       <label v-for="st in myselect">
-        <input type="checkbox" :name="st[0]" :checked="checked">
+        <input type="checkbox"  v-model="$store.state.trade.stock_pool" :value="st[0]" :checked="checked">
         <span>{{ st[0] }}:{{ st[1] }}</span>
       </label>
     </div>
@@ -46,7 +46,7 @@ export default {
         }
     ).catch(
         (error) => {
-          alert('error')
+          // alert('error')
         }
     )
     return {

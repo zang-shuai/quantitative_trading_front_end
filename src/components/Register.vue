@@ -72,8 +72,8 @@ export default {
             }
           }
       ).catch(function (error) {
-        console.log(error)
-        console.log('请求失败了', error.message)
+        // console.log(error)
+        // console.log('请求失败了', error.message)
       })
     }
 

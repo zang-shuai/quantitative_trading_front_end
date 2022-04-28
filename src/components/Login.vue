@@ -35,6 +35,7 @@ import {reactive, ref} from "vue";
 import axios from 'axios'
 import {useCookies} from "vue3-cookies"
 import $store from "../store"
+
 export default {
   name: "Login",
   setup() {
@@ -57,7 +58,6 @@ export default {
               // 设置cookie
               cookies.set("usertoken", response.data.token);
               cookies.set("userimage", response.data.img);
-
               let ele = document.querySelector('.clickMe');
               ele.addEventListener('click', function () {
 
@@ -69,7 +69,7 @@ export default {
             }
           }
       ).catch(function (error) {
-        console.log(error)
+        // console.log(error)
         console.log('请求失败了', error.message)
       })
     }

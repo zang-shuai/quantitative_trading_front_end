@@ -3,7 +3,7 @@
   <div class="bd-callout bd-callout-info" >
     <div class=" px-0">
       <h5>{{ question }}</h5>
-      <div class="form-check" v-for="value,key in select">
+      <div class="form-check" v-for="(value,key) in select">
         <label class="form-check-label">
           <input class="form-check-input" type="radio" :name="questionname" :value="value">
           {{ key }}

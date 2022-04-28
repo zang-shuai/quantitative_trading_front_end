@@ -23,7 +23,7 @@
         <router-link to="/home" class="nav-link px-2 link-secondary me-2">主页</router-link>
       </li>
       <li>
-        <router-link to="/lab/oneStock" class="nav-link px-2 link-dark me-2">行情观察</router-link>
+        <router-link to="/lab/trading" class="nav-link px-2 link-dark me-2">行情观察</router-link>
       </li>
       <li>
         <router-link to="/trade" class="nav-link px-2 link-dark me-2">代码交易</router-link>
