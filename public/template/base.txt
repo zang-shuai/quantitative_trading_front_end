@@ -1,0 +1,61 @@
+import datetime
+
+from api.utils.trade.stock_utils import Stock
+from api.utils.trade.user_utils import User
+
+# 买点
+def my_buy_point(date, stock_pool, now_money):
+    res = dict()
+    for stock in stock_pool:
+        s = stock_pool[stock]
+        pre_date = date
+        while True:
+            pre_date = pre_date - datetime.timedelta(1)
+            if Stock.is_trade_day(pre_date):
+                break
+        now_stock = s[date]
+        pre_stock = s[pre_date]
+        if type(now_stock) != type(False) and type(pre_stock) != type(False) and now_stock['ma5'] > now_stock[
+            'ma10'] and pre_stock['ma5'] < pre_stock['ma10']:
+            res[s.ts_code] = now_money // (now_stock['open'] * 100) // 2
+    return res
+
+
+# 卖点
+def my_sell_point(date, position, stock_pool, now_money):
+    res = dict()
+    for stock in position:
+        s = stock_pool[stock]
+        pre_date = date
+        while True:
+            pre_date = pre_date - datetime.timedelta(1)
+            if Stock.is_trade_day(pre_date):
+                break
+        now_stock = s[date]
+        pre_stock = s[pre_date]
+        if type(now_stock) != type(False) and type(pre_stock) != type(False) and now_stock['ma10'] > now_stock[
+            'ma5'] and pre_stock['ma10'] < pre_stock['ma5']:
+            res[s.ts_code] = position[s.ts_code] // 100
+    return res
+
+
+user_data = {
+    # 基础资金
+    'money': 100000,
+    # 月收入
+    'income': 5000,
+    # 开始日期
+    'start_date': datetime.datetime(2015, 1, 1),
+    # 结束日期
+    'end_date': datetime.datetime.today(),
+    # 股票池
+    'stock_pool': ['000001.SZ', '000002.SZ', '000003.SZ', '000004.SZ'],
+    # 买点
+    'buy_run': my_buy_point,
+    # 卖点
+    'sell_run': my_sell_point
+}
+
+u = User(**user_data)
+u.advance()
+result = u.return_data()

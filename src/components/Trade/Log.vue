@@ -1,12 +1,8 @@
 <template>
   <h4>日志：</h4>
   <div style="height:400px;width:100%;overflow-y:auto;margin-left: 30px">
-
     <div v-for="(value,key) in log">
-
-
       <span v-if="value[Object.keys(value)[0]]!== 0">{{ key }}:</span>
-
       <div v-for="(v,k) in value">
         <span v-if="v>0" style="color: red">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ k }}:买{{ v }}</span>
         <span v-if="v<0" style="color: green">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ k }}:卖{{ -v }}</span>

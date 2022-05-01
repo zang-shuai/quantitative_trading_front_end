@@ -21,6 +21,8 @@ export default {
             state.user.img = value.img
             state.user.phone_number = value.phone_number
             state.user.token = value.token
+            const {cookies} = useCookies()
+            cookies.set('userid', value.id)
             state.login = true
         },
         LOGOUT(state) {
@@ -35,6 +37,7 @@ export default {
             const {cookies} = useCookies()
             cookies.remove('usertoken');
             cookies.remove('userimage');
+            cookies.remove('userid');
         }
     },
     state: {

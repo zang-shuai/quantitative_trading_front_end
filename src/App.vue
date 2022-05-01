@@ -25,7 +25,7 @@ export default {
       cookies,
     }
   },
-  created() {
+  beforeCreate() {
     let userToken = this.cookies.get("usertoken");
     axios.get('http://127.0.0.1:8080/api/loginByToken', {
       params: {

@@ -1,15 +1,19 @@
 <template>
-  <v-ace-editor
-      v-model:value="$store.state.trade.content"
-      @init="editorInit"
-      lang="python"
-      style="height: 800px"
-  />
+  <div style="float:left;width:45%;">
+    <v-ace-editor
+        v-model:value="$store.state.trade.ai_code"
+        @init="editorInit"
+        lang="python"
+        style="height: 800px"
+    />
+  </div>
 </template>
 
 <script>
+import {ref} from "vue";
 import {VAceEditor} from 'vue3-ace-editor';
 
+import $store from "@/store";
 // 引入全局实例
 import ace from 'ace-builds'
 // 主题风格，引入主题后还需要在 options 中指定主题才会生效
@@ -27,12 +31,6 @@ import cssWorkerUrl from 'file-loader!ace-builds/src-noconflict/worker-css'
 
 import 'ace-builds/src-noconflict/mode-text';
 import 'ace-builds/src-noconflict/theme-chrome';
-import {ref} from "vue";
-import path from "path";
-import fs from "fs"
-import $store from "@/store";
-
-
 
 ace.config.setModuleUrl('ace/mode/javascript_worker', jsWorkerUrl)
 ace.config.setModuleUrl('ace/mode/json_worker', jsonWorkerUrl)
@@ -44,9 +42,9 @@ ace.config.setModuleUrl(
 )
 ace.config.setModuleUrl('ace/snippets/css', require('file-loader!ace-builds/src-noconflict/snippets/css.js'))
 
-
 export default {
-  name: "CodeEditor",
+  name: "AiEditor",
+  components: {VAceEditor},
   setup() {
     function editorInit(editor) {
       editor.setOptions({
@@ -61,11 +59,7 @@ export default {
     return {
       editorInit
     }
-
-  },
-  components: {
-    VAceEditor,
-  },
+  }
 }
 </script>
 

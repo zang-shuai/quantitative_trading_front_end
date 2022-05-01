@@ -20,6 +20,7 @@ import MySelect from "@/components/Trade/StockPool/MySelect";
 import Plate from "@/components/Trade/StockPool/Plate";
 import SmallMoney from "@/components/Trade/StockPool/SmallMoney";
 import All from "@/components/Trade/StockPool/All";
+import AILab from "@/views/AILab";
 
 const routes = [
     {
@@ -83,6 +84,12 @@ const routes = [
         path: '/register',
         name: 'Register',
         component: Register
+
+    },
+    {
+        path: '/ailab',
+        name: 'AILab',
+        component: AILab
 
     },
     {

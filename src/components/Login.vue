@@ -58,6 +58,7 @@ export default {
               // 设置cookie
               cookies.set("usertoken", response.data.token);
               cookies.set("userimage", response.data.img);
+              cookies.set("userid", response.data.id);
               let ele = document.querySelector('.clickMe');
               ele.addEventListener('click', function () {
 
