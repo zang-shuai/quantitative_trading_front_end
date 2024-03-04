@@ -5,12 +5,12 @@
     <div style="float:left;width:45%;">
       <operate-ai-code/>
       <div id="result" style="height:370px;width:100%;">
-        <Result v-if="show_result" :series1="money" :series2="asset" :x-axis="date"/>
-        <spinners v-if="!show_result"/>
+        <Result v-if="$store.state.trade.ai_result.show_result" :mytitle="mytitle" :names="names" :series1="$store.state.trade.ai_result.predict" :series2="$store.state.trade.ai_result.y_test" :x-axis="$store.state.trade.ai_result.time"/>
+        <spinners v-if="!$store.state.trade.ai_result.show_result"/>
       </div>
       <div style="height:400px;width:100%;">
-        <Log v-if="show_result" :log="log" :position="position"/>
-        <spinners v-if="!show_result"/>
+        <Summary v-if="$store.state.trade.ai_result.show_result"/>
+        <spinners v-if="!$store.state.trade.ai_result.show_result"/>
       </div>
     </div>
   </div>
@@ -32,15 +32,14 @@ import $store from "@/store";
 import OperateAiCode from "@/components/ai/OperateAiCode";
 import SelectCode from "@/components/ai/SelectCode";
 import AiEditor from "@/components/ai/AiEditor";
-
-
-
+import Summary from "@/components/ai/Summary";
 
 export default {
   name: "AILab",
   components: {
     AiEditor,
-    SelectCode, OperateAiCode, CodeEditor, Spinners, Basic, Buy, Log, Result, SelectStock, Sell},
+    SelectCode, OperateAiCode, CodeEditor, Spinners, Basic, Buy, Log, Result, SelectStock, Sell,Summary
+  },
   setup() {
     let show_result = ref(true)
     let date = ref([])
@@ -48,18 +47,25 @@ export default {
     let money = ref([])
     let log = reactive({})
     let position = reactive({})
+    let names = ref(['预测值','真实值'])
+    let mytitle = ref('预测效果')
+    // let time = ref([])
+    // let y_test = ref([])
+    // let predict = ref([])
+
+    function get_result(data) {
+      time.value = data.time
+      y_test.value = data.y_test
+      predict.value = data.predict
+    }
 
 
     function run_code() {
       show_result.value = false
       new Promise(function (resolve, reject) {
         const params = new URLSearchParams()
-
         let content = $store.state.trade.ai
-
         params.append('content', content)
-
-
         axios.post('http://127.0.0.1:8080/api/quantitative_trading_ai', params).then(
             function (response) {
               resolve(response.data.code)
@@ -91,6 +97,12 @@ export default {
       show_result,
       log,
       position,
+      get_result,
+      names,
+      mytitle
+      // time,
+      // y_test,
+      // predict
     }
   }
 }

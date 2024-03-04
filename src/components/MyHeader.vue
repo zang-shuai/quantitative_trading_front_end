@@ -31,13 +31,13 @@
       <li>
         <router-link to="/ailab" class="nav-link px-2 link-dark me-2">ai分析</router-link>
       </li>
-      <li>
-        <router-link to="/help" class="nav-link px-2 link-dark me-2">帮助</router-link>
-      </li>
-      <li>
-        <router-link to="/community" class="nav-link px-2 link-dark me-2">社区</router-link>
-      </li>
-      <li><a href="#" class="nav-link px-2 link-dark ">About</a></li>
+<!--      <li>-->
+<!--        <router-link to="/help" class="nav-link px-2 link-dark me-2">帮助</router-link>-->
+<!--      </li>-->
+<!--      <li>-->
+<!--        <router-link to="/community" class="nav-link px-2 link-dark me-2">社区</router-link>-->
+<!--      </li>-->
+<!--      <li><a href="#" class="nav-link px-2 link-dark ">About</a></li>-->
     </ul>
     <User v-show="isLogin"/>
     <LoginAndRegister v-show="!isLogin"/>

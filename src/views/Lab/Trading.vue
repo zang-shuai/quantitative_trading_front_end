@@ -17,7 +17,7 @@
     </div>
     <div style="float:left;width:50%;">
       <div id="result" style="height:400px;width:100%;">
-        <Result v-if="show_result" :series1="money" :series2="asset" :x-axis="date"/>
+        <Result v-if="show_result" :names="names" :mytitle="mytitle" :series1="money" :series2="asset" :x-axis="date"/>
         <spinners v-if="!show_result"/>
       </div>
       <div style="height:400px;width:100%;">
@@ -54,6 +54,8 @@ export default {
     let money = ref([])
     let log = reactive({})
     let position = reactive({})
+    let names = ref(['未购买','已购买'])
+    let mytitle = ref('模拟效果')
 
     function run() {
       if ($store.state.trade.stock_pool.length === 0 || $store.state.trade.buy.length === 0 || $store.state.trade.sell.length === 0) {
@@ -101,7 +103,9 @@ export default {
       money,
       show_result,
       log,
-      position
+      position,
+      mytitle,
+      names
     }
   }
 }

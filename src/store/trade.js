@@ -16,8 +16,6 @@ export default {
         }
 
 
-
-
     },
     mutations: {
         SAVE_AI_CODE(state, value) {
@@ -46,7 +44,7 @@ export default {
             )
         },
 
-        GET_AI_CODE(state, value){
+        GET_AI_CODE(state, value) {
             // $store.dispatch('trade/save_ai_code')
 
             // SAVE_AI_CODE(state,value)
@@ -75,6 +73,13 @@ export default {
         }
     },
     state: {
+        ai_result: {
+            show_result: true,
+            time: [],
+            y_test: [],
+            predict: [],
+            summary: ''
+        },
         basic_money: '10000',
         start_date: '2021-01-01',
         month_income: '5000',
@@ -86,7 +91,7 @@ export default {
         ai_code: '',
         ai_list: [],
         content: '# 买点\n' +
-            'def my_buy_point(date, stock_pool, now_money):\n' +
+            'def my_buy_point(date, stock_pool, now_money,model):\n' +
             '    res = dict()\n' +
             '    for stock in stock_pool:\n' +
             '        s = stock_pool[stock]\n' +
@@ -104,7 +109,7 @@ export default {
             '\n' +
             '\n' +
             '# 卖点\n' +
-            'def my_sell_point(date, position, stock_pool, now_money):\n' +
+            'def my_sell_point(date, position, stock_pool, now_money,model):\n' +
             '    res = dict()\n' +
             '    for stock in position:\n' +
             '        s = stock_pool[stock]\n' +
@@ -135,7 +140,8 @@ export default {
             '    # 买点\n' +
             '    \'buy_run\': my_buy_point,\n' +
             '    # 卖点\n' +
-            '    \'sell_run\': my_sell_point\n' +
+            '    \'sell_run\': my_sell_point,\n' +
+            '    \'model\': None,\n' +
             '}'
     },
     getters: {},

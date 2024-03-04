@@ -15,7 +15,7 @@
         </span>
       </div>
       <div id="result" style="height:370px;width:100%;">
-        <Result v-if="show_result" :series1="money" :series2="asset" :x-axis="date"/>
+        <Result v-if="show_result" :names="names" :mytitle="mytitle" :series1="money" :series2="asset" :x-axis="date"/>
         <spinners v-if="!show_result"/>
       </div>
       <div style="height:400px;width:100%;">
@@ -51,6 +51,8 @@ export default {
     let money = ref([])
     let log = reactive({})
     let position = reactive({})
+    let names = ref(['未购买', '已购买'])
+    let mytitle = ref('交易结果')
 
     function run1() {
       if ($store.state.trade.stock_pool.length === 0 || $store.state.trade.buy.length === 0 || $store.state.trade.sell.length === 0) {
@@ -66,6 +68,7 @@ export default {
           params.append('small_money', $store.state.trade.small_money)
           params.append('buy', $store.state.trade.buy)
           params.append('sell', $store.state.trade.sell)
+          params.append('userid', $store.state.user.user.id)
 
           axios.post('http://127.0.0.1:8080/api/quantitative_trading_img', params).then(
               function (response) {
@@ -141,7 +144,8 @@ export default {
       show_result,
       log,
       position,
-
+      names,
+      mytitle
     }
   }
 }

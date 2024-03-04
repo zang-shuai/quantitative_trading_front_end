@@ -20,7 +20,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary clickMe" data-bs-dismiss="modal">关闭</button>
-              <button type="button" class="btn btn-primary" @click="login()">登录</button>
+              <button type="button" class="btn btn-primary" :disabled="!(phone_number!==''&&password!=='')" @click="login()">登录</button>
             </div>
           </form>
         </div>
@@ -42,6 +42,7 @@ export default {
     let phone_number = ref('')
     let password = ref('')
     let error = ref('')
+    let canClick = ref(true)
     const {cookies} = useCookies()
 
 

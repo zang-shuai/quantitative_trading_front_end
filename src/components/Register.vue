@@ -23,7 +23,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary clickme" data-bs-dismiss="modal">取消</button>
-              <button type="button" class="btn btn-primary" :disabled="register_disabled" @click="user_register()">注册
+              <button type="button" class="btn btn-primary" :disabled="register_password===''||confirm_password===''||register_phone_number===''||              register_disabled" @click="user_register()">注册
               </button>
             </div>
           </form>
@@ -89,7 +89,7 @@ export default {
       }
     })
     watch(confirm_password, () => {
-      if (register_password.value !== confirm_password.value) {
+        if (register_password.value !== confirm_password.value) {
         error.value = '两次密码不相同'
         register_disabled.value = true
       } else {

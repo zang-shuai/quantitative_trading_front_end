@@ -49,24 +49,45 @@ import {ref} from "vue";
 
 export default {
   name: "OperateAiCode",
-  setup() {
+  emits: ['showData'],
+  setup({emit}) {
     let run_ai_code_show = ref(true)
     let save_ai_code_show = ref(true)
     let stop_ai_code_show = ref(true)
     let delete_ai_code_show = ref(true)
 
     function run_ai_code() {
+      $store.state.trade.ai_result.show_result = false
       run_ai_code_show.value = !run_ai_code_show.value
       $store.dispatch('trade/save_ai_code')
 
-      // setTimeout(()=>{
-      //   // alert(!run_ai_code_show.value)
-      // },3000)
-
-      // alert(run_ai_code_show.value)
-
+      new Promise(function (resolve, reject) {
+        const params = new URLSearchParams()
+        const {cookies} = useCookies()
+        params.append('user_id', cookies.get('userid'))
+        params.append('ai_code', $store.state.trade.ai_code)
+        axios.post('http://127.0.0.1:8080/api/run_ai_code', params).then(
+            function (response) {
+              resolve(response.data)
+            }
+        ).catch(function (error) {
+          reject(error.message)
+        })
+      }).then(
+          (data) => {
+            $store.state.trade.ai_result.time = data.code.time
+            $store.state.trade.ai_result.y_test = data.code.y_test
+            $store.state.trade.ai_result.predict = data.code.predict
+            $store.state.trade.ai_result.show_result = true
+            $store.state.trade.ai_result.summary = data.summary
+            // alert(data.summary)
+          }
+      ).catch(
+          (error) => {
+            // alert(error)
+          }
+      )
       run_ai_code_show.value = true
-
     }
 
     function save_ai_code() {
@@ -76,6 +97,7 @@ export default {
     }
 
     function stop_ai_code() {
+      $store.dispatch('trade/save_ai_code')
 
     }
 
@@ -96,23 +118,15 @@ export default {
         })
       }).then(
           (data) => {
-
-            // colors = ["red","blue","green"];
             $store.state.trade.ai_list.forEach(function (item, index, arr) {
               if (item === $store.state.trade.ai_name) {
                 arr.splice(index, 1);
               }
             });
-            // alert($store.state.trade.ai_list)
-            // $store.state.trade.ai_name = $store.state.trade.ai_list[0]
-            // $store.state.trade.ai_code =
-
-
-            // alert(data)
           }
       ).catch(
           (error) => {
-            alert(error)
+            // alert(error)
           }
       )
       delete_ai_code_show.value = !delete_ai_code_show.value

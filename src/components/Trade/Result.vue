@@ -8,22 +8,21 @@ import {ref} from "vue";
 
 export default {
   name: "Result",
-  props: ['xAxis', 'series1', 'series2'],
+  props: ['mytitle', 'names', 'xAxis', 'series1', 'series2'],
   setup(props) {
 
-    function draw_res(xAxis, series1, series2) {
+    function draw_res(mytitle, names, xAxis, series1, series2) {
       let chartDom = document.getElementById('res');
       let myChart = echarts.init(chartDom);
-      let option;
-      let option1 = {
+      let option = {
         title: {
-          text: ''
+          text: mytitle
         },
         tooltip: {
           trigger: 'axis'
         },
         legend: {
-          data: ['Email', 'Union Ads', 'Video Ads', 'Direct', 'Search Engine']
+          data: names
         },
         grid: {
           left: '3%',
@@ -39,7 +38,6 @@ export default {
         xAxis: {
           type: 'category',
           boundaryGap: false,
-          // data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
           data: xAxis
         },
         yAxis: {
@@ -47,21 +45,18 @@ export default {
         },
         series: [
           {
-            name: 'Direct',
+            name: names[0],
             type: 'line',
-            stack: 'Total',
             data: series1
           },
           {
-            name: 'Search Engine',
+            name: names[1],
             type: 'line',
-            stack: 'Total',
             data: series2
           }
         ]
       };
-
-      option = {
+      let option1 = {
         title: {
           text: '交易结果：'
         },
@@ -100,10 +95,7 @@ export default {
             smooth: true
           }]
       };
-
-
       option && myChart.setOption(option);
-
     }
 
 
@@ -113,9 +105,8 @@ export default {
     //然后异步执行echarts的初始化函数
     newPromise.then(() => {
       //  此dom为echarts图标展示dom
-      draw_res(props.xAxis, props.series1, props.series2)
+      draw_res(props.mytitle, props.names, props.xAxis, props.series1, props.series2)
     })
-
 
 
   },

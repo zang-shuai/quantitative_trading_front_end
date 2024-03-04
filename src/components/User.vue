@@ -11,7 +11,7 @@
       <li>
         <router-link to="/setting" class="dropdown-item">设置</router-link>
       </li>
-      <li><a class="dropdown-item" href="#">工作记录</a></li>
+<!--      <li><a class="dropdown-item" href="#">工作记录</a></li>-->
       <li>
         <hr class="dropdown-divider">
       </li>
